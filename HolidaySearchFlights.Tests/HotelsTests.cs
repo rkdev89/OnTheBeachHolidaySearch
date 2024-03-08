@@ -21,7 +21,7 @@ public class HotelsTests
         var actual = reader.ReadHotelData();
 
         // Assert
-        Assert.IsNotNull(actual);
-        Assert.Greater(actual.Count, 0);
+        Assert.That(actual, Is.Not.Null);
+        Assert.That(actual, Is.Not.Empty);
     }
 }

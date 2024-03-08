@@ -14,15 +14,13 @@ public class FlightsTests
     public void ReadFlightData_ShouldReturnFlightDataList()
     {
         // Arrange
-        //string json = File.ReadAllText(Constants.FlightsFilePath);
-        //var expected = JsonConvert.DeserializeObject<List<Flight>>(json);
         var reader = new DataReader();
 
         // Act
         var actual = reader.ReadFlightData();
 
         // Assert
-        Assert.IsNotNull(actual);
-        Assert.Greater(actual.Count, 0);
+        Assert.That(actual, Is.Not.Null);
+        Assert.That(actual, Is.Not.Empty);
     }
 }
