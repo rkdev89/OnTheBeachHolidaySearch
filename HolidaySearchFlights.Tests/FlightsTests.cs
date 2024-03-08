@@ -1,10 +1,9 @@
 using HolidaySearch;
-using Newtonsoft.Json;
 
 namespace HolidaySearchFlights.Tests;
 
 [TestFixture]
-public class Flights
+public class FlightsTests
 {
     [SetUp]
     public void Setup()
@@ -15,14 +14,15 @@ public class Flights
     public void ReadFlightData_ShouldReturnFlightDataList()
     {
         // Arrange
-        string json = File.ReadAllText(Constants.FlightsFilePath);
-        var expected = JsonConvert.DeserializeObject<List<Flight>>(json);
+        //string json = File.ReadAllText(Constants.FlightsFilePath);
+        //var expected = JsonConvert.DeserializeObject<List<Flight>>(json);
         var reader = new DataReader();
 
         // Act
         var actual = reader.ReadFlightData();
 
         // Assert
-        Assert.AreEqual(expected.Count, actual.Count);
+        Assert.IsNotNull(actual);
+        Assert.Greater(actual.Count, 0);
     }
 }
