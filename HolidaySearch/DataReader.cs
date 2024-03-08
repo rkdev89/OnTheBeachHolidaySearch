@@ -14,14 +14,14 @@ public class DataReader
         _hotelsFilePath = Path.Combine(assemblyDirectory, Constants.DATA_DIRECTORY, Constants.HOTELS_FILE_NAME);
     }
 
-    public List<Flight> ReadFlightData()
+    public IEnumerable<Flight> ReadFlightData()
     {
-        return ReadJsonFile<List<Flight>>(_flightsFilePath);
+        return ReadJsonFile<IEnumerable<Flight>>(_flightsFilePath);
     }
 
-    public List<Hotel> ReadHotelData()
+    public IEnumerable<Hotel> ReadHotelData()
     {
-        return ReadJsonFile<List<Hotel>>(_hotelsFilePath);
+        return ReadJsonFile<IEnumerable<Hotel>>(_hotelsFilePath);
     }
 
     private static T ReadJsonFile<T>(string filePath)
