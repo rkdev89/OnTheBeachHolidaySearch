@@ -9,8 +9,7 @@ public class DataReader
 
     public DataReader()
     {
-        var assemblyLocation = Assembly.GetExecutingAssembly().Location;
-        var assemblyDirectory = Path.GetDirectoryName(assemblyLocation);
+        var assemblyDirectory = GetFileDirectoryInfo();
         _flightsFilePath = Path.Combine(assemblyDirectory, "Data", "Flights.json");
         _hotelsFilePath = Path.Combine(assemblyDirectory, "Data", "Hotels.json");
     }
@@ -29,5 +28,11 @@ public class DataReader
     {
         var json = File.ReadAllText(filePath);
         return JsonConvert.DeserializeObject<T>(json);
+    }
+
+    private static string GetFileDirectoryInfo()
+    {
+        var directory = Assembly.GetExecutingAssembly().Location;
+        return Path.GetDirectoryName(directory);
     }
 }
