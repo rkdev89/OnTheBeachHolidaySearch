@@ -23,4 +23,6 @@ public class FlightsTests
         Assert.That(actual, Is.Not.Null);
         Assert.That(actual, Is.Not.Empty);
     }
+    // do test for empty json file
+    // do test for missing json file
 }

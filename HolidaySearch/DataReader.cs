@@ -10,8 +10,8 @@ public class DataReader
     public DataReader()
     {
         var assemblyDirectory = GetFileDirectoryInfo();
-        _flightsFilePath = Path.Combine(assemblyDirectory, "Data", "Flights.json");
-        _hotelsFilePath = Path.Combine(assemblyDirectory, "Data", "Hotels.json");
+        _flightsFilePath = Path.Combine(assemblyDirectory, Constants.DATA_DIRECTORY, Constants.FLIGHTS_FILE_NAME);
+        _hotelsFilePath = Path.Combine(assemblyDirectory, Constants.DATA_DIRECTORY, Constants.HOTELS_FILE_NAME);
     }
 
     public List<Flight> ReadFlightData()
