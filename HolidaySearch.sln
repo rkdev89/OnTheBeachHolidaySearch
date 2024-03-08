@@ -5,9 +5,7 @@ VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HolidaySearch", "HolidaySearch\HolidaySearch.csproj", "{612E3048-A9BA-44F0-87BF-836AEB74544C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HolidaySearchFlights.Tests", "HolidaySearchFlights.Tests\HolidaySearchFlights.Tests.csproj", "{E1AFC70A-449C-47CF-9228-0006253AFBED}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HolidaySearchHotels.Tests", "HolidaySearchHotels.Tests\HolidaySearchHotels.Tests.csproj", "{BF0DB67E-1C97-46D7-9F14-772D8C2FACDE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HolidaySearch.Tests", "HolidaySearchFlights.Tests\HolidaySearch.Tests.csproj", "{E1AFC70A-449C-47CF-9228-0006253AFBED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +21,6 @@ Global
 		{E1AFC70A-449C-47CF-9228-0006253AFBED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1AFC70A-449C-47CF-9228-0006253AFBED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1AFC70A-449C-47CF-9228-0006253AFBED}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BF0DB67E-1C97-46D7-9F14-772D8C2FACDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BF0DB67E-1C97-46D7-9F14-772D8C2FACDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BF0DB67E-1C97-46D7-9F14-772D8C2FACDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BF0DB67E-1C97-46D7-9F14-772D8C2FACDE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

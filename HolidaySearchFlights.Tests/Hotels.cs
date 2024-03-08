@@ -1,6 +1,8 @@
 namespace HolidaySearchFlights.Tests;
 
-public class Tests
+[TestFixture]
+public class Hotels
+
 {
     [SetUp]
     public void Setup()
