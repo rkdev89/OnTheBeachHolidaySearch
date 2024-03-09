@@ -1,14 +1,18 @@
 using HolidaySearch;
+using System.Runtime.CompilerServices;
 
 namespace HolidaySearchFlights.Tests;
 
 [TestFixture]
 public class HotelsTests
-
 {
+    private string _emptyFilePath;
+
     [SetUp]
     public void Setup()
     {
+        _emptyFilePath = Path.GetTempFileName();
+        File.WriteAllText(_emptyFilePath, "");
     }
 
     [Test]
@@ -24,7 +28,14 @@ public class HotelsTests
         Assert.That(actual, Is.Not.Null);
         Assert.That(actual, Is.Not.Empty);
     }
-    // do test for empty json file
-    // do test for missing json file
 
+    [Test]
+    public void ReadHotelData_WhenJsonFileMissing_ShouldThrowFileNotFoundException()
+    {
+        // Arrange
+        var reader = new DataReader();
+
+        // Act & Assert
+        Assert.Throws<FileNotFoundException>(() => reader.ReadJsonFile<string>(_emptyFilePath));
+    }
 }

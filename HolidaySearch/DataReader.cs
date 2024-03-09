@@ -24,7 +24,7 @@ public class DataReader
         return ReadJsonFile<IEnumerable<Hotel>>(_hotelsFilePath);
     }
 
-    private static T ReadJsonFile<T>(string filePath)
+    public T ReadJsonFile<T>(string filePath)
     {
         var json = File.ReadAllText(filePath);
         return JsonConvert.DeserializeObject<T>(json);
