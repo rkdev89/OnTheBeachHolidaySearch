@@ -5,14 +5,10 @@ namespace HolidaySearchFlights.Tests;
 [TestFixture]
 public class HotelsTests
 {
-    //private string _emptyFilePath;
-    //private string _testData;
-
     private string _emptyFilePath;
     private string _dummyFilePath;
     private string _dummyData;
     private readonly string _invalidPath = "nothingHere.json";
-
 
     [SetUp]
     public void Setup()
