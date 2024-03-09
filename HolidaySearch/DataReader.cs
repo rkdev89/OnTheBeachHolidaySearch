@@ -1,38 +1,28 @@
 ﻿using Newtonsoft.Json;
-using System.Reflection;
 
 namespace HolidaySearch;
 public class DataReader
 {
-    private readonly string _flightsFilePath;
-    private readonly string _hotelsFilePath;
-
-    public DataReader()
-    {
-        var assemblyDirectory = GetFileDirectoryInfo();
-        _flightsFilePath = Path.Combine(assemblyDirectory, Constants.DATA_DIRECTORY, Constants.FLIGHTS_FILE_NAME);
-        _hotelsFilePath = Path.Combine(assemblyDirectory, Constants.DATA_DIRECTORY, Constants.HOTELS_FILE_NAME);
+    public static IEnumerable<Flight>? ReadFlightData(string filePath)
+    {        
+        if(!FileExists(filePath)) throw new FileNotFoundException();
+        return ReadJsonFile<IEnumerable<Flight>>(filePath) ?? [];
     }
 
-    public IEnumerable<Flight> ReadFlightData()
+    public static IEnumerable<Hotel>? ReadHotelData(string filePath)
     {
-        return ReadJsonFile<IEnumerable<Flight>>(_flightsFilePath);
+        if (!FileExists(filePath)) throw new FileNotFoundException();
+        return ReadJsonFile<IEnumerable<Hotel>>(filePath) ?? [];
     }
 
-    public IEnumerable<Hotel> ReadHotelData()
-    {
-        return ReadJsonFile<IEnumerable<Hotel>>(_hotelsFilePath);
-    }
-
-    public T ReadJsonFile<T>(string filePath)
+    public static T? ReadJsonFile<T>(string filePath)
     {
         var json = File.ReadAllText(filePath);
-        return JsonConvert.DeserializeObject<T>(json);
+        return string.IsNullOrEmpty(json) ? default : JsonConvert.DeserializeObject<T>(json);
     }
 
-    private static string GetFileDirectoryInfo()
+    private static bool FileExists(string filePath)
     {
-        var directory = Assembly.GetExecutingAssembly().Location;
-        return Path.GetDirectoryName(directory);
+        return File.Exists(filePath);
     }
 }
