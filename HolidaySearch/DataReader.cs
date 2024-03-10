@@ -21,5 +21,5 @@ public class DataReader
         return string.IsNullOrEmpty(json) ? default : JsonConvert.DeserializeObject<T>(json);
     }
 
-    private static bool FileExists(string filePath) => FileExists(filePath);
+    private static bool FileExists(string filePath) => File.Exists(filePath);
 }
