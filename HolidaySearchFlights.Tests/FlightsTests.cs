@@ -62,7 +62,7 @@ public class FlightsTests
     }
 
     [Test]
-    public void ValidateFlightJsonFormat_IfValid_ReturnsTrue() 
+    public void ValidateValidFlightJsonFormat_IfValid_ReturnsTrue() 
     {
         var validData = @"[
           {
@@ -80,12 +80,39 @@ public class FlightsTests
             ""to"": ""AGP"",
             ""price"": 245,
             ""departure_date"": ""2023-07-01""
-          }";
+          }]";
 
         bool isValid = JsonSchemaValidator.IsValidJson(validData);
 
         Assert.That(isValid, Is.True);
     }
+
+    [Test]
+    public void ValidateInvalidFlightJsonFormat_IfInvalid_ReturnsFalse()
+    {
+        var validData = @"[
+          {
+            ""id"": 1,
+            ""airline"": ""First Class Air"",
+            ""from"": ""MAN"",
+            ""to"": ""TFS"",
+            ""price"": 470,
+            ""departure_date"": ""2023-07-01""
+          },
+          {
+            ""id"": 2,
+            ""airline"": ""Oceanic Airlines"",
+            ""from"": ""MAN"",
+            ""to"": ""AGP"",
+            ""price"": ""245"",
+            ""departure_date"": ""2023-07-01""
+          }]";
+
+        bool isValid = JsonSchemaValidator.IsValidJson(validData);
+
+        Assert.That(isValid, Is.False);
+    }
+
 
     private static string TestData()
     {
