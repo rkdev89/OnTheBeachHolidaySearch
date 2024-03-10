@@ -20,7 +20,14 @@ public class DataReader
         var json = File.ReadAllText(filePath);
         if (string.IsNullOrEmpty(json)) return default;
         if(!JsonSchemaValidator.IsValidJson(json)) throw new Exception("Invalid json schema");
-        return JsonConvert.DeserializeObject<T>(json);
+
+        var settings = new JsonSerializerSettings
+        {
+            DateFormatString = "yyyy-MM-dd"
+        };
+
+        var result = JsonConvert.DeserializeObject<T>(json, settings);
+        return result;
     }
 
     private static bool FileExists(string filePath) => File.Exists(filePath);
