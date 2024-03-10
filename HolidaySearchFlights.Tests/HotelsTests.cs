@@ -22,6 +22,14 @@ public class HotelsTests
         File.WriteAllText(_dummyFilePath, _dummyData);
     }
 
+    [TearDown]
+    public void Teardown()
+    {
+        if (File.Exists(_emptyFilePath)) File.Delete(_emptyFilePath);
+        if (File.Exists(_dummyFilePath)) File.Delete(_dummyFilePath);
+    }
+
+
     [Test]
     public void ReadHotelData_ShouldReturnHotelDataList()
     {
@@ -51,6 +59,32 @@ public class HotelsTests
 
         //Assert
         Assert.That(reader, Is.Empty);
+    }
+
+    [Test]
+    public void ValidateHotelJsonFormat_IfValid_ReturnsTrue()
+    {
+        var validData = @"[
+          {
+            ""id"": 1,
+            ""name"": ""Iberostar Grand Portals Nous"",
+            ""arrival_date"": ""2022-11-05"",
+            ""price_per_night"": 100,
+            ""local_airports"": [ ""TFS"" ],
+            ""nights"": 7
+          },
+          {
+            ""id"": 2,
+            ""name"": ""Laguna Park 2"",
+            ""arrival_date"": ""2022-11-05"",
+            ""price_per_night"": 50,
+            ""local_airports"": [ ""TFS"" ],
+            ""nights"": 7
+          }]";
+
+        bool isValid = JsonSchemaValidator.IsValidJson(validData);
+
+        Assert.That(isValid, Is.True);
     }
 
     private static string TestData()

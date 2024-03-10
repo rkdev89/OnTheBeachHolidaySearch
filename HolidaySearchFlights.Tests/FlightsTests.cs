@@ -22,6 +22,14 @@ public class FlightsTests
         File.WriteAllText(_dummyFilePath, _dummyData);
     }
 
+    [TearDown]
+    public void Teardown()
+    {
+        if(File.Exists(_emptyFilePath)) File.Delete(_emptyFilePath);
+        if(File.Exists(_dummyFilePath)) File.Delete(_dummyFilePath);
+    }
+
+
     [Test]
     public void ReadFlightData_ShouldReturnFlightDataList()
     {
@@ -51,6 +59,32 @@ public class FlightsTests
 
         //Assert
         Assert.That(reader, Is.Empty);
+    }
+
+    [Test]
+    public void ValidateFlightJsonFormat_IfValid_ReturnsTrue() 
+    {
+        var validData = @"[
+          {
+            ""id"": 1,
+            ""airline"": ""First Class Air"",
+            ""from"": ""MAN"",
+            ""to"": ""TFS"",
+            ""price"": 470,
+            ""departure_date"": ""2023-07-01""
+          },
+          {
+            ""id"": 2,
+            ""airline"": ""Oceanic Airlines"",
+            ""from"": ""MAN"",
+            ""to"": ""AGP"",
+            ""price"": 245,
+            ""departure_date"": ""2023-07-01""
+          }";
+
+        bool isValid = JsonSchemaValidator.IsValidJson(validData);
+
+        Assert.That(isValid, Is.True);
     }
 
     private static string TestData()
