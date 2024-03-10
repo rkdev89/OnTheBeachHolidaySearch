@@ -21,12 +21,7 @@ public class DataReader
         if (string.IsNullOrEmpty(json)) return default;
         if(!JsonSchemaValidator.IsValidJson(json)) throw new Exception("Invalid json schema");
 
-        var settings = new JsonSerializerSettings
-        {
-            DateFormatString = "yyyy-MM-dd"
-        };
-
-        var result = JsonConvert.DeserializeObject<T>(json, settings);
+        var result = JsonConvert.DeserializeObject<T>(json);
         return result;
     }
 
