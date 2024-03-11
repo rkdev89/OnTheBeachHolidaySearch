@@ -60,7 +60,7 @@ public class SearchHolidayTests
     //}
 
     [Test]
-    public void SearchHoliday_FindBestFlight_ReturnsBestValueFlight() 
+    public void SearchHoliday_FindBestFlightCustomerOne_ReturnsBestValueFlight() 
     {
         //Arrange
         var holiday = new Holiday();
@@ -80,7 +80,7 @@ public class SearchHolidayTests
     }
 
     [Test]
-    public void SearchHoliday_FindBestHotel_ReturnsBestValueHotel()
+    public void SearchHoliday_FindBestHotelCustomerOne_ReturnsBestValueHotel()
     {
         //Arrange
         var holiday = new Holiday();
@@ -98,5 +98,86 @@ public class SearchHolidayTests
         Assert.IsNotNull(result);
         Assert.AreEqual(9, result.Id);
     }
+
+    [Test]
+    public void SearchHoliday_FindBestFlightCustomerTwo_ReturnsBestValueFlight()
+    {
+        //Arrange
+        var holiday = new Holiday();
+        var request = new HolidaySearch()
+        {
+            DepartingFrom = "LGW",
+            TravellingTo = "PMI",
+            DepartureDate = DateTime.Parse("2023-06-15"),
+            Duration = 10
+        };
+        //Act
+        var result = holiday.FindBestFlight(request, "FlightDummyData.json").FirstOrDefault();
+
+        //Assert
+        Assert.IsNotNull(result);
+        Assert.AreEqual(6, result.Id);
+    }
+
+    [Test]
+    public void SearchHoliday_FindBestHotelCustomerTwo_ReturnsBestValueHotel()
+    {
+        //Arrange
+        var holiday = new Holiday();
+        var request = new HolidaySearch()
+        {
+            DepartingFrom = "LGW",
+            TravellingTo = "PMI",
+            DepartureDate = DateTime.Parse("2023-06-15"),
+            Duration = 10
+        };
+        //Act
+        var result = holiday.FindBestHotel(request, "HotelsDummyData.json").FirstOrDefault();
+
+        //Assert
+        Assert.IsNotNull(result);
+        Assert.AreEqual(5, result.Id);
+    }
+
+    [Test]
+    public void SearchHoliday_FindBestFlightCustomerThree_ReturnsBestValueFlight()
+    {
+        //Arrange
+        var holiday = new Holiday();
+        var request = new HolidaySearch()
+        {
+            DepartingFrom = "MAN",
+            TravellingTo = "LPA",
+            DepartureDate = DateTime.Parse("2022-11-10"),
+            Duration = 14
+        };
+        //Act
+        var result = holiday.FindBestFlight(request, "FlightDummyData.json").FirstOrDefault();
+
+        //Assert
+        Assert.IsNotNull(result);
+        Assert.AreEqual(7, result.Id);
+    }
+
+    [Test]
+    public void SearchHoliday_FindBestHotelCustomerThree_ReturnsBestValueHotel()
+    {
+        //Arrange
+        var holiday = new Holiday();
+        var request = new HolidaySearch()
+        {
+            DepartingFrom = "MAN",
+            TravellingTo = "LPA",
+            DepartureDate = DateTime.Parse("2022-11-10"),
+            Duration = 14
+        };
+        //Act
+        var result = holiday.FindBestHotel(request, "HotelsDummyData.json").FirstOrDefault();
+
+        //Assert
+        Assert.IsNotNull(result);
+        Assert.AreEqual(6, result.Id);
+    }
+
 }
 
