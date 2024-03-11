@@ -19,5 +19,4 @@ public class DataReader
         var result = JsonConvert.DeserializeObject<T>(json);
         return result;
     }
-
 }
