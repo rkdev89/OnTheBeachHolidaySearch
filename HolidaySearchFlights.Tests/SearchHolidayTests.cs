@@ -179,5 +179,10 @@ public class SearchHolidayTests
         Assert.AreEqual(6, result.Id);
     }
 
+    [Test]
+    public void CombineFlightAndHotel_CombineCustomerOneRequestResults_ReturnsBestValuePackage()
+    {
+        Assert.Fail();
+    }
 }
 
