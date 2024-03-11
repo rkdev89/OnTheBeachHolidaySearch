@@ -92,7 +92,7 @@ public class SearchHolidayTests
             Duration = 7
         };
         //Act
-        var result = holiday.FindBestHotel(request, "HotelsDummyData.json").FirstOrDefault();
+        var result = Holiday.FindBestHotel(request, "HotelsDummyData.json").FirstOrDefault();
 
         //Assert
         Assert.IsNotNull(result);
@@ -132,7 +132,7 @@ public class SearchHolidayTests
             Duration = 10
         };
         //Act
-        var result = holiday.FindBestHotel(request, "HotelsDummyData.json").FirstOrDefault();
+        var result = Holiday.FindBestHotel(request, "HotelsDummyData.json").FirstOrDefault();
 
         //Assert
         Assert.IsNotNull(result);
@@ -172,7 +172,7 @@ public class SearchHolidayTests
             Duration = 14
         };
         //Act
-        var result = holiday.FindBestHotel(request, "HotelsDummyData.json").FirstOrDefault();
+        var result = Holiday.FindBestHotel(request, "HotelsDummyData.json").FirstOrDefault();
 
         //Assert
         Assert.IsNotNull(result);
