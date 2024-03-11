@@ -22,7 +22,15 @@ public class Holiday
         return result;
     }
 
-
+    public IEnumerable<Hotel> FindBestHotel(HolidaySearch request, string hotelsFilePath)
+    {
+        var hotels = DataReader.ReadHotelData(hotelsFilePath);
+        var result = hotels.Where(h =>
+                     h.LocalAirports.Contains(request.TravellingTo) &&
+                     h.Nights == request.Duration &&
+                     h.ArrivalDate == request.DepartureDate).OrderBy(p => p.PricePerNight * request.Duration);
+        return result;
+    }
 
 
 

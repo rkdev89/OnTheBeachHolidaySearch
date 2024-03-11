@@ -8,7 +8,7 @@ public class Hotel
     public string Name { get; set; }
 
     [JsonProperty(PropertyName ="arrival_date")]
-    public string ArrivalDate { get; set; }
+    public DateTime ArrivalDate { get; set; }
     public int PricePerNight { get; set; }
 
     [JsonProperty(PropertyName = "local_airports")]

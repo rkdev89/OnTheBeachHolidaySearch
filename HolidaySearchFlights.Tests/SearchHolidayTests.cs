@@ -78,5 +78,25 @@ public class SearchHolidayTests
         Assert.IsNotNull(result);
         Assert.AreEqual(2, result.Id);
     }
+
+    [Test]
+    public void SearchHoliday_FindBestHotel_ReturnsBestValueHotel()
+    {
+        //Arrange
+        var holiday = new Holiday();
+        var request = new HolidaySearch()
+        {
+            DepartingFrom = "MAN",
+            TravellingTo = "AGP",
+            DepartureDate = DateTime.Parse("2023-07-01"),
+            Duration = 7
+        };
+        //Act
+        var result = holiday.FindBestHotel(request, "HotelsDummyData.json").FirstOrDefault();
+
+        //Assert
+        Assert.IsNotNull(result);
+        Assert.AreEqual(9, result.Id);
+    }
 }
 
