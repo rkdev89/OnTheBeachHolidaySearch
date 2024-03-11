@@ -182,7 +182,67 @@ public class SearchHolidayTests
     [Test]
     public void CombineFlightAndHotel_CombineCustomerOneRequestResults_ReturnsBestValuePackage()
     {
-        Assert.Fail();
+        //Arrange
+        var holiday = new Holiday();
+        var request = new HolidaySearch()
+        {
+            DepartingFrom = "MAN",
+            TravellingTo = "AGP",
+            DepartureDate = DateTime.Parse("2023-07-01"),
+            Duration = 7
+        };
+
+        //Act
+        var (bestFlight, bestHotel) = holiday.BestValuePackage(request, "FlightDummyData.json", "HotelsDummyData.json");
+
+        Assert.IsNotNull(bestFlight);
+        Assert.IsNotNull(bestHotel);
+        Assert.AreEqual(2, bestFlight.FirstOrDefault().Id);
+        Assert.AreEqual(9, bestHotel.FirstOrDefault().Id);
+    }
+
+    [Test]
+    public void CombineFlightAndHotel_CombineCustomerTwoRequestResults_ReturnsBestValuePackage()
+    {
+        //Arrange
+        var holiday = new Holiday();
+        var request = new HolidaySearch()
+        {
+            DepartingFrom = "LGW",
+            TravellingTo = "PMI",
+            DepartureDate = DateTime.Parse("2023-06-15"),
+            Duration = 10
+        };
+
+        //Act
+        var (bestFlight, bestHotel) = holiday.BestValuePackage(request, "FlightDummyData.json", "HotelsDummyData.json");
+
+        Assert.IsNotNull(bestFlight);
+        Assert.IsNotNull(bestHotel);
+        Assert.AreEqual(6, bestFlight.FirstOrDefault().Id);
+        Assert.AreEqual(5, bestHotel.FirstOrDefault().Id);
+
+    }
+
+    [Test]
+    public void CombineFlightAndHotel_CombineCustomerThreeRequestResults_ReturnsBestValuePackage()
+    {
+        //Arrange
+        var holiday = new Holiday();
+        var request = new HolidaySearch()
+        {
+            DepartingFrom = "LGW",
+            TravellingTo = "LPA",
+            DepartureDate = DateTime.Parse("2022-11-10"),
+            Duration = 14
+        };
+
+        //Act
+        var (bestFlight, bestHotel) = holiday.BestValuePackage(request, "FlightDummyData.json", "HotelsDummyData.json");
+
+        Assert.IsNotNull(bestFlight);
+        Assert.IsNotNull(bestHotel);
+        Assert.AreEqual(7, bestFlight.FirstOrDefault().Id);
+        Assert.AreEqual(6, bestHotel.FirstOrDefault().Id);
     }
 }
-

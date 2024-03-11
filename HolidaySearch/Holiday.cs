@@ -32,6 +32,12 @@ public class Holiday
         return result;
     }
 
+    public (IEnumerable<Flight>, IEnumerable<Hotel>) BestValuePackage(HolidaySearch request, string flightsFilePath, string hotelsFilePath)
+    {
+        var bestFlight = FindBestFlight(request, flightsFilePath);
+        var bestHotel = FindBestHotel(request, hotelsFilePath);
+        return (bestFlight, bestHotel);
+    }
 
 
     //public IEnumerable<(int flightId, int hotelId)> FindClosestMatch(HolidaySearch search)
