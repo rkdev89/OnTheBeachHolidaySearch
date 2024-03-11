@@ -10,16 +10,21 @@ public class Holiday
     //   // _hotelsFilePath = hotelsFilePath;
     //}
 
-    public IEnumerable<Flight> FindBestFlight(string flightsFilePath)
+    public IEnumerable<Flight> FindBestFlight(HolidaySearch request, string flightsFilePath)
     {
         var flights = DataReader.ReadFlightData(flightsFilePath);
-        if (flights == null)
-        {
-            return [];
-        }
-        return flights;
 
+        var result = flights.Where(f =>
+            f.From == request.DepartingFrom &&
+            f.To == request.TravellingTo &&
+            f.DepartureDate ==  request.DepartureDate).OrderBy(f => f.Price);
+
+        return result;
     }
+
+
+
+
 
     //public IEnumerable<(int flightId, int hotelId)> FindClosestMatch(HolidaySearch search)
     //{

@@ -64,12 +64,19 @@ public class SearchHolidayTests
     {
         //Arrange
         var holiday = new Holiday();
-
+        var request = new HolidaySearch()
+        {
+            DepartingFrom = "MAN",
+            TravellingTo = "AGP",
+            DepartureDate = DateTime.Parse("2023-07-01"),
+            Duration = 7
+        };
         //Act
-        holiday.FindBestFlight("FlightDummyData.json");
+       var result = holiday.FindBestFlight(request,"FlightDummyData.json").FirstOrDefault();
 
         //Assert
-        Assert.IsNotNull(holiday);
+        Assert.IsNotNull(result);
+        Assert.AreEqual(2, result.Id);
     }
 }
 
