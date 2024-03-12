@@ -1,5 +1,5 @@
 ﻿namespace HolidaySearch;
-public class Holiday
+public class HolidayService : IHolidayService
 {
     public IEnumerable<Flight> FindBestFlight(HolidaySearch request, string flightsFilePath)
     {
