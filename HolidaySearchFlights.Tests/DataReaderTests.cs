@@ -1,13 +1,12 @@
-using HolidaySearch;
-
-namespace HolidaySearchFlights.Tests;
+﻿namespace HolidaySearch.Tests;
 
 [TestFixture]
-public class HotelsTests
+public class DataReaderTests
 {
     private string _emptyFilePath;
     private string _dummyFilePath;
-    private string _dummyData;
+    private string _dummyFlightData;
+    private string _dummyHotelData;
     private readonly string _invalidPath = "nothingHere.json";
 
     [SetUp]
@@ -16,10 +15,12 @@ public class HotelsTests
         _emptyFilePath = Path.GetTempFileName();
         File.WriteAllText(_emptyFilePath, "");
 
-        _dummyData = TestData();
+        _dummyFlightData = FlightTestData();
+        _dummyHotelData = HotelTestData();
         _dummyFilePath = Path.GetTempFileName();
 
-        File.WriteAllText(_dummyFilePath, _dummyData);
+        File.WriteAllText(_dummyFilePath, _dummyFlightData);
+        File.WriteAllText(_dummyFilePath, _dummyHotelData);
     }
 
     [TearDown]
@@ -27,6 +28,41 @@ public class HotelsTests
     {
         if (File.Exists(_emptyFilePath)) File.Delete(_emptyFilePath);
         if (File.Exists(_dummyFilePath)) File.Delete(_dummyFilePath);
+    }
+
+    [Test]
+    public void ReadFlightData_ShouldReturnFlightDataList()
+    {
+        // Arrange & Act
+        var reader = new DataReader();
+        var result = reader.ReadData<Flight>(_dummyFilePath);
+
+        // Assert
+        Assert.That(result, Is.Not.Null);
+        Assert.That(result, Is.Not.Empty);
+    }
+
+    [Test]
+    public void ReadFlightData_WhenJsonFileMissing_ShouldThrowFileNotFoundException()
+    {
+        // Arrange
+        var reader = new DataReader();
+
+        // Act & Assert
+        Assert.Throws<FileNotFoundException>(() => reader.ReadData<Flight>(_invalidPath));
+    }
+
+    [Test]
+    public void ReadFlightData_WhenJsonFileEmpty_ShouldReturnEmptyCollection()
+    {
+        // Arrange
+        var reader = new DataReader();
+
+        //Act
+        var result = reader.ReadData<Flight>(_emptyFilePath);
+
+        //Assert
+        Assert.That(result, Is.Empty);
     }
 
     [Test]
@@ -66,59 +102,110 @@ public class HotelsTests
         Assert.That(result, Is.Empty);
     }
 
-    [Test]
-    public void ValidateHotelJsonFormat_IfValid_ReturnsTrue()
+
+    private static string FlightTestData()
     {
-        var validData = @"[
-          {
+        return @"[
+            {
             ""id"": 1,
-            ""name"": ""Iberostar Grand Portals Nous"",
-            ""arrival_date"": ""2022-11-05"",
-            ""price_per_night"": 100,
-            ""local_airports"": [ ""TFS"" ],
-            ""nights"": 7
+            ""airline"": ""First Class Air"",
+            ""from"": ""MAN"",
+            ""to"": ""TFS"",
+            ""price"": 470,
+            ""departure_date"": ""2023-07-01""
           },
           {
             ""id"": 2,
-            ""name"": ""Laguna Park 2"",
-            ""arrival_date"": ""2022-11-05"",
-            ""price_per_night"": 50,
-            ""local_airports"": [ ""TFS"" ],
-            ""nights"": 7
-          }]";
-
-        bool isValid = JsonSchemaValidator.IsValidJson(validData);
-
-        Assert.That(isValid, Is.True);
-    }
-
-    [Test]
-    public void ValidateHotelJsonFormat_IfInvalid_ReturnsFalse()
-    {
-        var validData = @"[
-          {
-            ""id"": 1,
-            ""name"": ""Iberostar Grand Portals Nous"",
-            ""arrival_date"": ""2022-11-05"",
-            ""price_per_night"": ""100"",
-            ""local_airports"": [ ""TFS"" ],
-            ""nights"": 7
+            ""airline"": ""Oceanic Airlines"",
+            ""from"": ""MAN"",
+            ""to"": ""AGP"",
+            ""price"": 245,
+            ""departure_date"": ""2023-07-01""
           },
           {
-            ""id"": 2,
-            ""name"": ""Laguna Park 2"",
-            ""arrival_date"": ""2022-11-05"",
-            ""price_per_night"": 50,
-            ""local_airports"": [ ""TFS"" ],
-            ""nights"": 7
-          }]";
-
-        bool isValid = JsonSchemaValidator.IsValidJson(validData);
-
-        Assert.That(isValid, Is.False);
+            ""id"": 3,
+            ""airline"": ""Trans American Airlines"",
+            ""from"": ""MAN"",
+            ""to"": ""PMI"",
+            ""price"": 170,
+            ""departure_date"": ""2023-06-15""
+          },
+          {
+            ""id"": 4,
+            ""airline"": ""Trans American Airlines"",
+            ""from"": ""LTN"",
+            ""to"": ""PMI"",
+            ""price"": 153,
+            ""departure_date"": ""2023-06-15""
+          },
+          {
+            ""id"": 5,
+            ""airline"": ""Fresh Airways"",
+            ""from"": ""MAN"",
+            ""to"": ""PMI"",
+            ""price"": 130,
+            ""departure_date"": ""2023-06-15""
+          },
+          {
+            ""id"": 6,
+            ""airline"": ""Fresh Airways"",
+            ""from"": ""LGW"",
+            ""to"": ""PMI"",
+            ""price"": 75,
+            ""departure_date"": ""2023-06-15""
+          },
+          {
+            ""id"": 7,
+            ""airline"": ""Trans American Airlines"",
+            ""from"": ""MAN"",
+            ""to"": ""LPA"",
+            ""price"": 125,
+            ""departure_date"": ""2022-11-10""
+          },
+          {
+            ""id"": 8,
+            ""airline"": ""Fresh Airways"",
+            ""from"": ""MAN"",
+            ""to"": ""LPA"",
+            ""price"": 175,
+            ""departure_date"": ""2023-11-10""
+          },
+          {
+            ""id"": 9,
+            ""airline"": ""Fresh Airways"",
+            ""from"": ""MAN"",
+            ""to"": ""AGP"",
+            ""price"": 140,
+            ""departure_date"": ""2023-04-11""
+          },
+          {
+            ""id"": 10,
+            ""airline"": ""First Class Air"",
+            ""from"": ""LGW"",
+            ""to"": ""AGP"",
+            ""price"": 225,
+            ""departure_date"": ""2023-07-01""
+          },
+          {
+            ""id"": 11,
+            ""airline"": ""First Class Air"",
+            ""from"": ""LGW"",
+            ""to"": ""AGP"",
+            ""price"": 155,
+            ""departure_date"": ""2023-07-01""
+          },
+          {
+            ""id"": 12,
+            ""airline"": ""Trans American Airlines"",
+            ""from"": ""MAN"",
+            ""to"": ""AGP"",
+            ""price"": 202,
+            ""departure_date"": ""2023-10-25""
+          }
+        ]";
     }
 
-    private static string TestData()
+    private static string HotelTestData()
     {
         return @"[
               {

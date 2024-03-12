@@ -33,7 +33,7 @@ public class HolidayService : IHolidayService
         return 3;
     }
 
-    public static IEnumerable<Hotel> FindBestHotel(HolidaySearch request, string hotelsFilePath)
+    public IEnumerable<Hotel> FindBestHotel(HolidaySearch request, string hotelsFilePath)
     {
         var reader = new DataReader();
         var hotels = reader.ReadData<Hotel>(hotelsFilePath);
