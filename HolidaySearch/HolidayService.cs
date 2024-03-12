@@ -1,9 +1,12 @@
-﻿namespace HolidaySearch;
+﻿using HolidaySearch.Interfaces;
+
+namespace HolidaySearch;
 public class HolidayService : IHolidayService
 {
     public IEnumerable<Flight> FindBestFlight(HolidaySearch request, string flightsFilePath)
     {
-        var flights = DataReader.ReadFlightData(flightsFilePath);
+        var reader = new DataReader();
+        var flights = reader.ReadData<Flight>(flightsFilePath);
 
         var sortedFlights = flights
             .OrderBy(f => CalculateFlightPriority(f, request))
@@ -32,7 +35,8 @@ public class HolidayService : IHolidayService
 
     public static IEnumerable<Hotel> FindBestHotel(HolidaySearch request, string hotelsFilePath)
     {
-        var hotels = DataReader.ReadHotelData(hotelsFilePath);
+        var reader = new DataReader();
+        var hotels = reader.ReadData<Hotel>(hotelsFilePath);
 
         var result = hotels.Where(h =>
             (string.IsNullOrEmpty(request.TravellingTo) || h.LocalAirports.Contains(request.TravellingTo)) &&

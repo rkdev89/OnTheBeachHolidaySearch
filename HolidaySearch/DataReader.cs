@@ -1,11 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using HolidaySearch.Interfaces;
+using Newtonsoft.Json;
 
 namespace HolidaySearch;
-public class DataReader
+public class DataReader : IDataReader
 {
-    public static IEnumerable<Flight>? ReadFlightData(string filePath) => ReadJsonFile<IEnumerable<Flight>>(filePath) ?? [];
-
-    public static IEnumerable<Hotel>? ReadHotelData(string filePath) => ReadJsonFile<IEnumerable<Hotel>>(filePath) ?? [];
+    public IEnumerable<T>? ReadData<T>(string filePath) => ReadJsonFile<IEnumerable<T>>(filePath) ?? [];
 
     private static bool FileExists(string filePath) => File.Exists(filePath);
 

@@ -33,11 +33,12 @@ public class FlightsTests
     public void ReadFlightData_ShouldReturnFlightDataList()
     {
         // Arrange & Act
-        var reader = DataReader.ReadFlightData(_dummyFilePath);
+        var reader = new DataReader();
+        var result = reader.ReadData<Flight>(_dummyFilePath);
 
         // Assert
-        Assert.That(reader, Is.Not.Null);
-        Assert.That(reader, Is.Not.Empty);
+        Assert.That(result, Is.Not.Null);
+        Assert.That(result, Is.Not.Empty);
     }
 
     [Test]
@@ -47,17 +48,20 @@ public class FlightsTests
         var reader = new DataReader();
 
         // Act & Assert
-        Assert.Throws<FileNotFoundException>(() => DataReader.ReadFlightData(_invalidPath));
+        Assert.Throws<FileNotFoundException>(() => reader.ReadData<Flight>(_invalidPath));
     }
 
     [Test]
     public void ReadFlightData_WhenJsonFileEmpty_ShouldReturnEmptyCollection()
     {
-        // Arrange & Act
-        var reader = DataReader.ReadFlightData(_emptyFilePath);
+        // Arrange
+        var reader = new DataReader();
+
+        //Act
+        var result = reader.ReadData<Flight>(_emptyFilePath);
 
         //Assert
-        Assert.That(reader, Is.Empty);
+        Assert.That(result, Is.Empty);
     }
 
     [Test]

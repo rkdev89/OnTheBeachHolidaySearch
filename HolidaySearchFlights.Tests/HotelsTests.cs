@@ -32,8 +32,11 @@ public class HotelsTests
     [Test]
     public void ReadHotelData_ShouldReturnHotelDataList()
     {
-        // Arrange & Act
-        var actual = DataReader.ReadHotelData(_dummyFilePath);
+        // Arrange
+        var reader = new DataReader();
+
+        // Act
+        var actual = reader.ReadData<Hotel>(_dummyFilePath);
 
         // Assert
         Assert.That(actual, Is.Not.Null);
@@ -53,11 +56,14 @@ public class HotelsTests
     [Test]
     public void ReadHotelData_WhenJsonFileEmpty_ShouldReturnEmptyCollection()
     {
-        // Arrange & Act
-        var reader = DataReader.ReadHotelData(_emptyFilePath);
+        // Arrange
+        var reader = new DataReader();
+
+        //Act
+        var result = reader.ReadData<Flight>(_emptyFilePath);
 
         //Assert
-        Assert.That(reader, Is.Empty);
+        Assert.That(result, Is.Empty);
     }
 
     [Test]

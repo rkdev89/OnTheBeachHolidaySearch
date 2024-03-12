@@ -1,5 +1,4 @@
-﻿using NUnit.Framework;
-using NUnit.Framework.Internal;
+﻿using NUnit.Framework.Internal;
 
 namespace HolidaySearch.Tests;
 
@@ -22,7 +21,7 @@ public class SearchHolidayTests
             Duration = 7
         };
         //Act
-       var result = holiday.FindBestFlight(request,"FlightDummyData.json").FirstOrDefault();
+       var result = holiday.FindBestFlight(request, FLIGHTS_FILE_PATH).FirstOrDefault();
 
         //Assert
         Assert.IsNotNull(result);
@@ -42,7 +41,7 @@ public class SearchHolidayTests
             Duration = 7
         };
         //Act
-        var result = HolidayService.FindBestHotel(request, "HotelsDummyData.json").FirstOrDefault();
+        var result = HolidayService.FindBestHotel(request, HOTELS_FILE_PATH).FirstOrDefault();
 
         //Assert
         Assert.IsNotNull(result);
@@ -62,7 +61,7 @@ public class SearchHolidayTests
             Duration = 10
         };
         //Act
-        var result = holiday.FindBestFlight(request, "FlightDummyData.json").FirstOrDefault();
+        var result = holiday.FindBestFlight(request, FLIGHTS_FILE_PATH).FirstOrDefault();
 
         //Assert
         Assert.IsNotNull(result);
@@ -82,7 +81,7 @@ public class SearchHolidayTests
             Duration = 10
         };
         //Act
-        var result = HolidayService.FindBestHotel(request, "HotelsDummyData.json").FirstOrDefault();
+        var result = HolidayService.FindBestHotel(request, HOTELS_FILE_PATH).FirstOrDefault();
 
         //Assert
         Assert.IsNotNull(result);
@@ -102,7 +101,7 @@ public class SearchHolidayTests
             Duration = 14
         };
         //Act
-        var result = holiday.FindBestFlight(request, "FlightDummyData.json").FirstOrDefault();
+        var result = holiday.FindBestFlight(request, FLIGHTS_FILE_PATH).FirstOrDefault();
 
         //Assert
         Assert.IsNotNull(result);
@@ -121,7 +120,7 @@ public class SearchHolidayTests
             Duration = 14
         };
         //Act
-        var result = HolidayService.FindBestHotel(request, "HotelsDummyData.json").FirstOrDefault();
+        var result = HolidayService.FindBestHotel(request, HOTELS_FILE_PATH).FirstOrDefault();
 
         //Assert
         Assert.IsNotNull(result);
@@ -142,7 +141,7 @@ public class SearchHolidayTests
         };
 
         //Act
-        var (bestFlight, bestHotel) = holiday.BestValuePackage(request, "FlightDummyData.json", "HotelsDummyData.json");
+        var (bestFlight, bestHotel) = holiday.BestValuePackage(request, FLIGHTS_FILE_PATH, HOTELS_FILE_PATH);
 
         Assert.IsNotNull(bestFlight);
         Assert.IsNotNull(bestHotel);
@@ -164,7 +163,7 @@ public class SearchHolidayTests
         };
 
         //Act
-        var (bestFlight, bestHotel) = holiday.BestValuePackage(request, "FlightDummyData.json", "HotelsDummyData.json");
+        var (bestFlight, bestHotel) = holiday.BestValuePackage(request, FLIGHTS_FILE_PATH, HOTELS_FILE_PATH);
 
         Assert.IsNotNull(bestFlight);
         Assert.IsNotNull(bestHotel);
@@ -187,7 +186,7 @@ public class SearchHolidayTests
         };
 
         //Act
-        var (bestFlight, bestHotel) = holiday.BestValuePackage(request, "FlightDummyData.json", "HotelsDummyData.json");
+        var (bestFlight, bestHotel) = holiday.BestValuePackage(request, FLIGHTS_FILE_PATH, HOTELS_FILE_PATH);
 
         Assert.IsNotNull(bestFlight);
         Assert.IsNotNull(bestHotel);
