@@ -7,7 +7,7 @@ public class SearchHolidayTests
 {
     private const string FLIGHTS_FILE_PATH = "Data\\FlightDummyData.json";
     private const string HOTELS_FILE_PATH = "Data\\HotelsDummyData.json";
-    private readonly DataReader _reader = new DataReader();
+    private readonly DataReader _reader = new();
 
     [Test]
     public void SearchHoliday_FindBestFlightCustomerOne_ReturnsBestValueFlight() 
