@@ -5,14 +5,15 @@ namespace HolidaySearch.Tests;
 [TestFixture]
 public class SearchHolidayTests
 {
-    private const string FLIGHTS_FILE_PATH = "FlightDummyData.json";
-    private const string HOTELS_FILE_PATH = "HotelsDummyData.json";
+    private const string FLIGHTS_FILE_PATH = "Data\\FlightDummyData.json";
+    private const string HOTELS_FILE_PATH = "Data\\HotelsDummyData.json";
+    private readonly DataReader _reader = new DataReader();
 
     [Test]
     public void SearchHoliday_FindBestFlightCustomerOne_ReturnsBestValueFlight() 
     {
         //Arrange
-        var holidayService = new HolidayService();
+        var holidayService = new HolidayService(_reader);
         var request = new HolidaySearch()
         {
             DepartingFrom = "MAN",
@@ -32,7 +33,7 @@ public class SearchHolidayTests
     public void SearchHoliday_FindBestHotelCustomerOne_ReturnsBestValueHotel()
     {
         //Arrange
-        var holidayService = new HolidayService();
+        var holidayService = new HolidayService(_reader);
         var request = new HolidaySearch()
         {
             DepartingFrom = "MAN",
@@ -52,7 +53,7 @@ public class SearchHolidayTests
     public void SearchHoliday_FindBestFlightCustomerTwo_ReturnsBestValueFlight()
     {
         //Arrange
-        var holidayService = new HolidayService();
+        var holidayService = new HolidayService(_reader);
         var request = new HolidaySearch()
         {
             DepartingFrom = "LGW",
@@ -72,7 +73,7 @@ public class SearchHolidayTests
     public void SearchHoliday_FindBestHotelCustomerTwo_ReturnsBestValueHotel()
     {
         //Arrange
-        var holidayService = new HolidayService();
+        var holidayService = new HolidayService(_reader);
         var request = new HolidaySearch()
         {
             DepartingFrom = "LGW",
@@ -92,7 +93,7 @@ public class SearchHolidayTests
     public void SearchHoliday_FindBestFlightCustomerThree_ReturnsBestValueFlight()
     {
         //Arrange
-        var holiday = new HolidayService();
+        var holiday = new HolidayService(_reader);
         var request = new HolidaySearch()
         {
             DepartingFrom = "MAN",
@@ -112,7 +113,7 @@ public class SearchHolidayTests
     public void SearchHoliday_FindBestHotelCustomerThree_ReturnsBestValueHotel()
     {
         //Arrange
-        var holidayService = new HolidayService();
+        var holidayService = new HolidayService(_reader);
 
         var request = new HolidaySearch()
         {
@@ -133,7 +134,7 @@ public class SearchHolidayTests
     public void CombineFlightAndHotel_CombineCustomerOneRequestResults_ReturnsBestValuePackage()
     {
         //Arrange
-        var holiday = new HolidayService();
+        var holiday = new HolidayService(_reader);
         var request = new HolidaySearch()
         {
             DepartingFrom = "MAN",
@@ -155,7 +156,7 @@ public class SearchHolidayTests
     public void CombineFlightAndHotel_CombineCustomerTwoRequestResults_ReturnsBestValuePackage()
     {
         //Arrange
-        var holiday = new HolidayService();
+        var holiday = new HolidayService(_reader);
         var request = new HolidaySearch()
         {
             DepartingFrom = "LGW",
@@ -178,7 +179,7 @@ public class SearchHolidayTests
     public void CombineFlightAndHotel_CombineCustomerThreeRequestResults_ReturnsBestValuePackage()
     {
         //Arrange
-        var holiday = new HolidayService();
+        var holiday = new HolidayService(_reader);
         var request = new HolidaySearch()
         {
             DepartingFrom = "LGW",

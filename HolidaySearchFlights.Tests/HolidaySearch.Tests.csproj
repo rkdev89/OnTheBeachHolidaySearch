@@ -26,10 +26,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="FlightDummyData.json">
+    <None Update="Data\FlightDummyData.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="HotelsDummyData.json">
+    <None Update="Data\HotelsDummyData.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
